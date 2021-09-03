@@ -36,18 +36,15 @@ const job = document.getElementById("job");
 const info = document.getElementById("info");
 
 const btns = document.querySelectorAll(".btn");
-const prevBtn = document.querySelector(".prev-btn");
-const nextBtn = document.querySelector(".next-btn");
-const randomBtn = document.querySelector(".random-btn");
 
 let currentItem = 0;
 
 window.addEventListener("DOMContentLoaded", () => {
-    setDescription();
+    setDescription(currentItem);
 });
 
-function setDescription() {
-    const item = reviews[currentItem];
+function setDescription(person) {
+    const item = reviews[person];
     img.src = item.img;
     author.textContent = item.name;
     job.textContent = item.job;
@@ -63,14 +60,17 @@ btns.forEach((btn) => {
         if (direction.contains("next")) {
             currentItem++;
         }
+        if (direction.contains("random")) {
+            let someNum = Math.floor(Math.random() * 4);
+            currentItem = someNum;
+        }
 
         if (currentItem < 0) {
             currentItem = 3;
-        } else if (currentItem > 3) {
+        } else if (currentItem > reviews.length - 1) {
             currentItem = 0;
         }
 
-        console.log(currentItem);
-        setDescription();
+        setDescription(currentItem);
     });
 });
