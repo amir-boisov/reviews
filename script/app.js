@@ -61,8 +61,9 @@ btns.forEach((btn) => {
             currentItem++;
         }
         if (direction.contains("random")) {
-            let someNum = Math.floor(Math.random() * 4);
+            let someNum = Math.floor(Math.random() * reviews.length);
             currentItem = someNum;
+            console.log(someNum);
         }
 
         if (currentItem < 0) {
